@@ -6,16 +6,16 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def return_to_contacts_page(self):
+    def return_to_personal_page(self):
         wd = self.app.wd
-        if wd.current_url.endswith("/") and len(wd.find_elements_by_name("to_group")) > 0:
+        if wd.current_url.endswith("UserProfile"):
             return
-        wd.find_element_by_link_text("home").click()
+        wd.find_element_by_classname("logo").click()
 
-    def select_contact(self, index):
+    """def select_contact(self, index):
         # select first contact
         wd = self.app.wd
-        wd.find_elements_by_name("selected[]")[index].click()
+        wd.find_elements_by_name("selected[]")[index].click()"""
 
     def change_field(self, field_name, text):
         wd = self.app.wd
@@ -60,10 +60,10 @@ class ContactHelper:
         self.change_field("phone2", contact.phone)
         self.change_field("notes", contact.notes)
 
-    def create_new_contact(self, contact):
+    """def create_new_contact(self, contact):
         # create contact
         wd = self.app.wd
-        self.return_to_contacts_page()
+        self.return_to_personal_page()
         wd.find_element_by_link_text("add new").click()
         self.fill_contact(contact)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
@@ -72,17 +72,17 @@ class ContactHelper:
     def delete_contact(self, index):
             # delete contact
             wd = self.app.wd
-            self.return_to_contacts_page()
+            self.return_to_personal_page()
             self.select_contact(index)
             wd.find_element_by_xpath("//input[@value='Delete']").click()
             wd.switch_to_alert().accept()
-            #self.return_to_contacts_page()
+            #self.return_to_personal_page()
             self.contacts_cash = None
 
 
     def modify_contact(self, contact, index):
             wd = self.app.wd
-            self.return_to_contacts_page()
+            self.return_to_personal_page()
             self.select_contact(index)
             self.open_edit_page_by_index(index)
             self.fill_contact(contact)
@@ -91,12 +91,12 @@ class ContactHelper:
 
     def open_edit_page_by_index(self, index):
         wd = self.app.wd
-        self.return_to_contacts_page()
+        self.return_to_personal_page()
         wd.find_elements_by_css_selector('img[alt="Edit"]')[index].click()
 
     def count(self):
         wd = self.app.wd
-        self.return_to_contacts_page()
+        self.return_to_personal_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     contacts_cash = None
@@ -104,7 +104,7 @@ class ContactHelper:
     def get_contact_list(self):
         if self.contacts_cash is None:
             wd = self.app.wd
-            self.return_to_contacts_page()
+            self.return_to_personal_page()
             self.contacts_cash = []
             for element in wd.find_elements_by_xpath("//tr[@name='entry']"):
                 id = element.find_element_by_css_selector("td.center").find_element_by_name("selected[]").get_attribute("value")
@@ -141,7 +141,7 @@ class ContactHelper:
         mobile = re.search("M: (.*)", text).group(1)
         work = re.search("W: (.*)", text).group(1)
         phone = re.search("P: (.*)", text).group(1)
-        return Contact(home=home, mobile=mobile, work=work, phone=phone)
+        return Contact(home=home, mobile=mobile, work=work, phone=phone)"""
 
 
 

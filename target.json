@@ -1,5 +1,5 @@
 {
-  "base_url": "http://localhost/addressbook/",
-  "username": "admin",
+  "base_url": "https://pdo.gridcom-rt.ru/Account/Login?ReturnUrl=%2fAccount",
+  "username": "dkadmin",
   "password": "secret"
 }

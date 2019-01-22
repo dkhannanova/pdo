@@ -29,7 +29,7 @@ class Application:
     def is_session_valid(self):
         try:
 
-            self.wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='home'])[1]/preceding::a[3]")
+            self.wd.find_element_by_xpath("//form[@id='logoutFormlogout']//action")
             return True
         except:
             return False
